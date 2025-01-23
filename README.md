@@ -1,4 +1,5 @@
 ´´´mermaid
+   flowchart LR
    %% Huvudhubbar
    Central[Central Rörelsehub]
    SmartHome[Smart Hem-hub]
