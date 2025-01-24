@@ -1,40 +1,42 @@
 ```mermaid
-flowchart LR
-    %% Huvudhubbar
-    Central[Central Rörelsehub]
-    SmartHome[Smart Hem-hub]
-    Security[Säkerhetshub]
+graph TD
+    %% Network Layer
+    WIFI[WiFi Nätverk]
+    
+    %% Main Control Units
+    CU[Centralstyrenhet] --> |WiFi| WIFI
+    WIFI --> |WiFi| MS[Rörelsesensor]
+    WIFI --> |WiFi| EL[Elsäkerhetsstyrenhet]
+    WIFI --> |WiFi| SH[Smart Hem-styrenhet]
 
-    %% Rörelsesensor-anslutna System
-    Central --> Detektion[Rörelsedetektering]
-    Detektion --> Belysning[Belysningskontroll]
-    Detektion --> Kamera[Kameraaktivering]
-    Detektion --> Larm[Larmsystem]
-    Detektion --> Spray[Säkerhetsspray]
-    Detektion --> AutoDrone[Patrullerande Drönare]
-    Detektion --> Underhallning[Underhållningsrespons]
-    Underhallning --> Disco[Disko & Laser]
-    Underhallning --> Robot[Hemrobot]
-    Underhallning --> Fika[Fika & Dryck]
-
-    %% Smarta Hem-system
-    SmartHome --> Klimat[Klimatkontroll]
-    SmartHome --> Persienner[Persiennstyrning]
-    SmartHome --> Timer[Automatisering & Timer]
-    SmartHome --> Integration[Systemintegration]
-    SmartHome --> Tillganglighet[Tillgänglighetsfunktioner]
-    SmartHome --> Vatten[Vattenläckagedetektion]
-    SmartHome --> Husdjur[Husdjursidentifiering]
-    Tillganglighet --> Blink[Dörrsignalbelysning]
-    Tillganglighet --> Rost[Röstigenkänning]
-
-    %% Säkerhetssystem
-    Security --> Fort[Fortliknande Säkerhet]
-    Security --> Escape[Escape Room]
-    Security --> Vallgrav[Säkerhetsvallgrav]
-    Security --> Fallor[Säkerhetsfällor]
-    Security --> RFID[GPS & RFID-spårning]
-
-    %% Styling
-    classDef hub fill:#f9f,stroke:#333,stroke-width:2px
-    class Central,SmartHome,Security hub
+    %% Security System Components
+    MS --> SEC[Säkerhetskomponenter]
+    SEC --> |WiFi| CAM[Säkerhetskamera]
+    SEC --> |WiFi| VA[Röstassistent]
+    SEC --> |WiFi| RFID[RFID-läsare]
+    
+    %% Motion Detection Flow
+    MS --> |WiFi| AL[Larm]
+    MS --> |WiFi| CAM
+    RFID --> |WiFi| AL
+    RFID --> |WiFi| MS
+    
+    %% Electrical Safety System
+    EL --> |WiFi| TS[Temperatursensorer]
+    EL --> |WiFi| ES[Elförbrukningssensorer]
+    EL --> |WiFi| LS[Läckagedetektorer]
+    
+    TS --> |WiFi| JB[Jordfelsbrytare]
+    ES --> |WiFi| EP[Elkonsumtion]
+    LS --> |WiFi| EL[Elläckage]
+    
+    %% Smart Home Control
+    SH --> |WiFi| DD[Enhetskontroll]
+    DD --> |WiFi| AP[Apparater]
+    DD --> |WiFi| TM[Timers]
+    
+    style CU fill:#000000,stroke:#333,color:#fff
+    style MS fill:#000000,stroke:#333,color:#fff
+    style EL fill:#000000,stroke:#333,color:#fff
+    style SH fill:#000000,stroke:#333,color:#fff
+    style WIFI fill:#000000,stroke:#333,color:#fff
